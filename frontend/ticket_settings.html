@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}Ticket Settings{% endblock %}
+
+{% block content %}
+<h3>Ticket System Settings</h3>
+<form action="{{ url_for('ticket_settings') }}" method="post">
+    <div class="mb-3">
+        <label for="panel_title" class="form-label">Panel Title:</label>
+        <input type="text" id="panel_title" name="panel_title" class="form-control" placeholder="Enter Panel Title" required>
+    </div>
+    <div class="mb-3">
+        <label for="panel_description" class="form-label">Panel Description:</label>
+        <textarea id="panel_description" name="panel_description" class="form-control" placeholder="Enter Panel Description" required></textarea>
+    </div>
+    <div class="mb-3">
+        <label for="target_channel" class="form-label">Target Channel ID:</label>
+        <input type="text" id="target_channel" name="target_channel" class="form-control" placeholder="Enter Target Channel ID" required>
+    </div>
+    <button type="submit" name="create_ticket_panel" class="btn btn-primary">Create Ticket Panel</button>
+</form>
+
+<h4 class="mt-4">Existing Ticket Panels:</h4>
+<ul class="list-group">
+    {% for panel in ticket_panels %}
+    <li class="list-group-item">
+        <strong>{{ panel.title }}</strong>: {{ panel.description }} (Channel ID: {{ panel.channel_id }})
+    </li>
+    {% endfor %}
+    {% if not ticket_panels %}
+    <li class="list-group-item text-center text-muted">No ticket panels created yet.</li>
+    {% endif %}
+</ul>
+{% endblock %}

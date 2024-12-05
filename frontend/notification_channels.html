@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Notification Channels{% endblock %}
+
+{% block content %}
+<h3>Notification Channels</h3>
+<form action="{{ url_for('notification_channels') }}" method="post">
+    <div class="mb-3">
+        <label for="notification_channel" class="form-label">Add Notification Channel:</label>
+        <input type="text" id="notification_channel" name="notification_channel" class="form-control" placeholder="Enter Notification Channel ID" required>
+    </div>
+    <button type="submit" name="add_channel" class="btn btn-primary">Add Channel</button>
+</form>
+
+<h4 class="mt-4">Current Notification Channels:</h4>
+<ul class="list-group">
+    {% for channel in notification_channels %}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        {{ channel }}
+        <form action="{{ url_for('notification_channels') }}" method="post" class="d-inline">
+            <input type="hidden" name="notification_channel" value="{{ channel }}">
+            <button type="submit" name="delete_channel" class="btn btn-danger btn-sm">Delete</button>
+        </form>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

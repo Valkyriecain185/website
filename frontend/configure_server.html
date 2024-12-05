@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}Configure Server{% endblock %}
+
+{% block content %}
+<h3>Configure Server: {{ guild_config.guild_name if guild_config.guild_name else 'Unknown Server' }}</h3>
+
+<div class="card my-4">
+    <div class="card-header">YouTube Channels</div>
+    <div class="card-body">
+        {% if guild_config.channels %}
+        <ul class="list-group">
+            {% for channel in guild_config.channels %}
+            <li class="list-group-item">{{ channel }}</li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p class="text-muted">No YouTube channels have been added yet.</p>
+        {% endif %}
+    </div>
+</div>
+
+<div class="card my-4">
+    <div class="card-header">Notification Channels</div>
+    <div class="card-body">
+        {% if guild_config.notification_channels %}
+        <ul class="list-group">
+            {% for channel in guild_config.notification_channels %}
+            <li class="list-group-item">{{ channel }}</li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p class="text-muted">No notification channels have been added yet.</p>
+        {% endif %}
+    </div>
+</div>
+
+<div class="card my-4">
+    <div class="card-header">Counting Game Channels</div>
+    <div class="card-body">
+        {% if guild_config.counting_channels %}
+        <ul class="list-group">
+            {% for channel in guild_config.counting_channels %}
+            <li class="list-group-item">{{ channel }}</li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p class="text-muted">No counting channels have been added yet.</p>
+        {% endif %}
+    </div>
+</div>
+
+<div class="card my-4">
+    <div class="card-header">Ticket Panels</div>
+    <div class="card-body">
+        {% if guild_config.ticket_panels %}
+        <ul class="list-group">
+            {% for panel in guild_config.ticket_panels %}
+            <li class="list-group-item">
+                <strong>{{ panel.title }}</strong>: {{ panel.description }} (Channel ID: {{ panel.channel_id }})
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p class="text-muted">No ticket panels have been created yet.</p>
+        {% endif %}
+    </div>
+</div>
+
+<a href="{{ url_for('save_server_config') }}" class="btn btn-success mt-3">Save Configuration</a>
+{% endblock %}

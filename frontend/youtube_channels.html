@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}YouTube Channels{% endblock %}
+
+{% block content %}
+<h3>YouTube Channels</h3>
+<form action="{{ url_for('youtube_channels') }}" method="post">
+    <div class="mb-3">
+        <label for="channel_id" class="form-label">Add YouTube Channel:</label>
+        <input type="text" id="channel_id" name="channel_id" class="form-control" placeholder="Enter YouTube Channel ID" required>
+    </div>
+    <button type="submit" name="add_channel" class="btn btn-primary">Add Channel</button>
+</form>
+
+<h4 class="mt-4">Current Channels:</h4>
+<ul class="list-group">
+    {% for channel in youtube_channels %}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        {{ channel }}
+        <form action="{{ url_for('youtube_channels') }}" method="post" class="d-inline">
+            <input type="hidden" name="channel_id" value="{{ channel }}">
+            <button type="submit" name="delete_channel" class="btn btn-danger btn-sm">Delete</button>
+        </form>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
