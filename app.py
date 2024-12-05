@@ -18,7 +18,7 @@ ADMIN_PASSWORD = "1322"  # Replace this with your desired admin password.
 # Discord OAuth2 setup
 DISCORD_CLIENT_ID = '1313855855619473501'
 DISCORD_CLIENT_SECRET = 'ji3QW45GiXYpihk3J712vQz_OkRv_fGH'
-DISCORD_REDIRECT_URI = 'http://localhost:5000/login/callback'
+DISCORD_REDIRECT_URI = 'http://just-another-discord-bot.co.uk/login/callback'
 
 oauth = OAuth(app)
 discord = oauth.register(
